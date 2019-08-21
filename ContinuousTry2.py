@@ -29,7 +29,7 @@ while True:
     humidity, temp = Adafruit_DHT.read_retry(DHT_TYPE, DHT_PIN)
 
 
-    file = open(“testfile.txt”,”w”)
+    file = open("testfile.txt","w")
 
     # Skip to the next reading if a valid measurement couldn't be taken.
     # This might happen if the CPU is under a lot of load and the sensor
@@ -40,14 +40,14 @@ while True:
 
     # Append the data in the spreadsheet, including a timestamp
     try:
+        print('Temperature: {0:0.1f} C ... Humidity: {1:0.1f} %'.format(temp, humidity))
         file.write((datetime.datetime.now().isoformat(), temp, humidity))
     except:
         # Error appending data, most likely because credentials are stale.
         # Null out the worksheet so a login is performed at the top of the loop.
-        print('Append error, logging in again')
+        print('Error writing to file.')
         continue
 
-    print('Temperature: {0:0.1f} C ... Humidity: {1:0.1f} %'.format(temp, humidity))
     time.sleep(FREQUENCY_SECONDS)
 
 file.close()
