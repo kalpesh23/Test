@@ -22,14 +22,11 @@ FREQUENCY_SECONDS = 30
 print('Logging sensor measurements every {0} seconds.'.format(FREQUENCY_SECONDS))
 print('Press Ctrl-C to quit.')
 
-
+file = open("testfile.txt","w+")
 
 while True:
     # Attempt to get sensor reading.
     humidity, temp = Adafruit_DHT.read_retry(DHT_TYPE, DHT_PIN)
-
-
-    file = open("testfile.txt","w")
 
     # Skip to the next reading if a valid measurement couldn't be taken.
     # This might happen if the CPU is under a lot of load and the sensor
@@ -40,7 +37,7 @@ while True:
 
     # Append the data in the spreadsheet, including a timestamp
     try:
-        print('Temperature: {0:0.1f} C ... Humidity: {1:0.1f} %'.format(temp, humidity))
+        print('Temperature: {0:0.1f} C ... Humidity: {1:0.1f}\r\n %'.format(temp, humidity))
         file.write((datetime.datetime.now().isoformat(), temp, humidity))
     except:
         # Error appending data, most likely because credentials are stale.
