@@ -24,10 +24,10 @@ DHT_SENSOR_PIN  = 4
 
 # Steps to obtain Google Docs OAuth credential JSON file.  
 #   http://gspread.readthedocs.org/en/latest/oauth2.html
-GOOGLE_OAUTH2_JSON_FILE       = 'your SpreadsheetData-*.json file name'
+GOOGLE_OAUTH2_JSON_FILE       = 'DHT 22 Sensor-f3e9aeee2f74.json'
 
 # Google Docs spreadsheet name.
-GOOGLE_SHEET_NAME = 'your google docs spreadsheet name'
+GOOGLE_SHEET_NAME = 'dht22sensor'
 
 # How long to wait (in seconds) between measurements.
 FREQUENCY_SECONDS      = 30
