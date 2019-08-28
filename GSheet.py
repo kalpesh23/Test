@@ -59,7 +59,7 @@ while True:
         worksheet = open_google_sheet(GOOGLE_OAUTH2_JSON_FILE, GOOGLE_SHEET_NAME)
 
     # Get Sensor reading.
-    humidity, temp = Adafruit_DHT.read(DHT_SENSOR_TYPE, DHT_SENSOR_PIN)
+    humidity, temp = Adafruit_DHT.read_retry(DHT_SENSOR_TYPE, DHT_SENSOR_PIN)
 
     # If no reading retrieved, retry after 3 seconds.
     if temp is None or humidity is None:
