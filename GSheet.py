@@ -7,6 +7,12 @@
 #   sudo pip install gspread oauth2client
 #   sudo apt-get install python-openssl
 
+# Install Spidev
+# 1. In Terminal type: sudo raspi-config
+# 2. Navigate to: 5. Interfacing options > P4. SPI
+# 3. Enable SPI interface
+
+
 import json
 import sys
 import time
@@ -49,6 +55,7 @@ def open_google_sheet(oauth_key_file, spreadsheet):
         credentials = ServiceAccountCredentials.from_json_keyfile_name(oauth_key_file, scope)
         gc = gspread.authorize(credentials)
         worksheet = gc.open(spreadsheet).sheet1
+        # worksheet = gc.open(spreadsheet).get_worksheet(0)  
         return worksheet
     except Exception as ex:
         # Troubleshooting items: Google Sheet name (GOOGLE_SHEET_NAME), ensure the Google Sheet is shared to the client_email address in the OAuth .json file
@@ -58,7 +65,7 @@ def open_google_sheet(oauth_key_file, spreadsheet):
 
 def get_analog_reading(channel):
     spi.max_speed_hz = 1350000
-    adc = spi.xfer2([1,(8+pin)<<4,0])
+    adc = spi.xfer2([1,(8+channel)<<4,0])
     data = ((adc[1]&3) << 8) + adc[2]
     return data
 
@@ -91,7 +98,8 @@ try:
 
         # Append the data in the spreadsheet, including a timestamp
         try:
-            CURRENT_DT = datetime.datetime.now().isoformat()
+            CURRENT_DT = datetime.datetime.now()
+            CURRENT_DT_Format = CURRENT_DT.strftime("%d/%m/%Y %H:%M:%S")
             print('{0} - Temperature: {1:0.1f} C; Humidity:    {2:0.1f} %; Moisture: {3:0.1f}%'.format(CURRENT_DT, temp, humidity, moisture))
             worksheet.append_row((CURRENT_DT, temp, humidity, moisture))
         except:
