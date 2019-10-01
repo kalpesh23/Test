@@ -99,7 +99,7 @@ try:
         # Append the data in the spreadsheet, including a timestamp
         try:
             CURRENT_DT = datetime.datetime.now()
-            CURRENT_DT_Format = CURRENT_DT.strftime("%d/%m/%Y %H:%M:%S")
+            CURRENT_DT = CURRENT_DT.strftime("%d/%m/%Y %H:%M:%S")
             print('{0} - Temperature: {1:0.1f} C; Humidity:    {2:0.1f} %; Moisture: {3:0.1f}%'.format(CURRENT_DT, temp, humidity, moisture))
             worksheet.append_row((CURRENT_DT, temp, humidity, moisture))
         except:
