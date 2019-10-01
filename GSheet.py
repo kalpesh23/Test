@@ -18,8 +18,7 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
 import spidev # To communicate with SPI devices
-from numpy import interp  # To scale values
-from time import sleep  # To add delay
+from numpy import interp # To scale values
 
 # Sensor Details
 DHT_SENSOR_TYPE = Adafruit_DHT.DHT22
